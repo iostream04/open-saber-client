@@ -1,0 +1,41 @@
+{
+  "teacher": {
+    "id": "xsd:string",
+    "type": "Teacher",
+    "prefix": "opensaber",
+    "definition": {
+      "teacherId": {
+        "prefix": "opensaber",
+        "type": "schema:Text"
+      },
+      "name": {
+        "prefix": "schema",
+        "type": "schema:Text"
+      },
+      "gender": {
+        "prefix": "opensaber",
+        "type": "opensaber:enumeration"
+      },
+      "birthDate": {
+        "prefix": "opensaber",
+        "type": "schema:Date"
+      },
+      "email": {
+        "prefix": "opensaber",
+        "type": "schema:Email",
+        "collection": true
+      },
+      "telephone": {
+        "prefix": "opensaber",
+        "type": "schema:Telephone",
+        "collection": true
+      }
+    }
+  },
+  "context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "opensaber": "http://localhost:8080/",
+    "schema": "http://schema.org/",
+    "@vocab": "http://localhost:8080/"
+  }
+}
