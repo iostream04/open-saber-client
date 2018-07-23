@@ -2,268 +2,222 @@
   "teacher":{
     "id":"xsd:string",
     "type":"Teacher",
-    "prefix": "teacher",
+    "prefix":"diksha",
     "definition":{
-      "serialNum":{
-        "prefix":"teacher",
-        "type":"xsd:integer"
+      "teacherId":{
+        "prefix":"diksha",
+        "type":"schema:Text"
       },
-      "teacherCode":{
-        "prefix":"teacher",
-        "type":"xsd:string"
+      "firstName":{
+        "prefix":"diksha",
+        "type":"schema:Text"
       },
-      "nationalIdentifier":{
-        "prefix":"teacher",
-        "type":"xsd:string"
+      "lastName":{
+        "prefix":"diksha",
+        "type":"schema:Text"
       },
-      "teacherName":{
-        "prefix":"teacher",
-        "type":"xsd:string"
-      },
-      "email": {
-        "prefix": "teacher",
-        "collection": true,
-        "type": "schema:Text"
-      },
-      "telephone": {
-        "prefix": "teacher",
-        "type": "schema:Text"
+      "fullName":{
+        "prefix":"diksha",
+        "type":"schema:Text"
       },
       "gender":{
-        "prefix":"teacher",
+        "prefix":"diksha",
         "type":"opensaber:enumeration"
       },
       "birthDate":{
-        "prefix":"teacher",
-        "type":"xsd:date"
+        "prefix":"diksha",
+        "type":"schema:Date"
       },
-      "socialCategory":{
-        "prefix":"teacher",
-        "type":"opensaber:enumeration"
+      "email":{
+        "prefix":"diksha",
+        "type":"schema:Email"
       },
-      "highestAcademicQualification":{
-        "prefix":"teacher",
-        "type":"opensaber:enumeration"
+      "telephone":{
+        "prefix":"diksha",
+        "type":"schema:Telephone"
       },
-      "highestTeacherQualification":{
-        "prefix":"teacher",
-        "type":"opensaber:enumeration"
-      },
-      "yearOfJoiningService":{
-        "prefix":"teacher",
-        "type":"xsd:gYear"
-      },
-      "teachingRole":{
-        "prefix":"teacher",
-        "type":"TeachingRole",
+      "externalIds":{
+        "prefix":"diksha",
+        "type":"ExternalID",
         "id":"xsd:string",
-        "definition":{
-          "teacherType":{
-            "prefix":"teacher",
-            "type":"opensaber:enumeration"
-          },
-          "appointmentType":{
-            "prefix":"teacher",
-            "type":"opensaber:enumeration"
-          },
-          "classesTaught":{
-            "prefix":"teacher",
-            "type":"opensaber:enumeration_array"
-          },
-          "appointedForSubjects":{
-            "prefix":"teacher",
-            "type":"opensaber:enumeration_array"
-          },
-          "mainSubjectsTaught":{
-            "prefix":"teacher",
-            "type":"opensaber:enumeration_array"
-          },
-          "appointmentYear":{
-            "prefix":"teacher",
-            "type":"xsd:gYear"
-          }
-        }
-      },
-      "inServiceTeacherTrainingFromBRC":{
-        "prefix":"teacher",
-        "type":"InServiceTeacherTrainingFromBlockResourceCentre",
-        "definition":{
-          "daysOfInServiceTeacherTraining":{
-            "prefix":"teacher",
-            "type":"xsd:decimal"
-          }
-        }
-      },
-      "inServiceTeacherTrainingFromCRC":{
-        "prefix":"teacher",
-        "type":"InServiceTeacherTrainingFromClusterResourceCentre",
-        "definition":{
-          "daysOfInServiceTeacherTraining":{
-            "prefix":"teacher",
-            "type":"xsd:decimal"
-          }
-        }
-      },
-      "inServiceTeacherTrainingFromDIET":{
-        "prefix":"teacher",
-        "type":"InServiceTeacherTrainingFromDIET",
-        "definition":{
-          "daysOfInServiceTeacherTraining":{
-            "prefix":"teacher",
-            "type":"xsd:decimal"
-          }
-        }
-      },
-      "inServiceTeacherTrainingFromOthers":{
-        "prefix":"teacher",
-        "type":"InServiceTeacherTrainingFromOthers",
-        "definition":{
-          "daysOfInServiceTeacherTraining":{
-            "prefix":"teacher",
-            "type":"xsd:decimal"
-          }
-        }
-      },
-      "nonTeachingAssignmentsForAcademicCalendar":{
-        "prefix":"teacher",
-        "type":"NonTeachingAssignmentsForAcademicCalendar",
-        "definition":{
-          "daysOfNonTeachingAssignments":{
-            "prefix":"teacher",
-            "type":"xsd:decimal"
-          }
-        }
-      },
-      "basicProficiencyLevel":{
-        "prefix":"teacher",
-        "type":"BasicProficiencyLevel",
         "collection":true,
-        "id": "xsd:string",
         "definition":{
-          "proficiencySubject":{
-            "prefix":"teacher",
-            "type":"opensaber:enumeration"
+          "eid":{
+            "prefix":"diksha",
+            "type":"schema:Text"
           },
-          "proficiencyAcademicQualification":{
-            "prefix":"teacher",
-            "type":"opensaber:enumeration"
+          "idType":{
+            "prefix":"diksha",
+            "type":"schema:Text"
+          },
+          "provider":{
+            "prefix":"diksha",
+            "type":"schema:Text"
           }
         }
       },
-      "disabilityType":{
-        "prefix":"teacher",
+      "employmentState":{
+        "prefix":"diksha",
         "type":"opensaber:enumeration"
       },
-      "trainedForChildrenSpecialNeeds":{
-        "prefix":"teacher",
-        "type":"opensaber:enumeration"
-      },
-      "trainedinUseOfComputer":{
-        "prefix":"teacher",
-        "type":"opensaber:enumeration"
-      }
-    }
-  },
-  "basicProficiencyLevel":{
-    "prefix":"teacher",
-    "type":"BasicProficiencyLevel",
-    "id": "xsd:string",
-    "definition":{
-      "proficiencySubject":{
-        "prefix":"teacher",
-        "type":"opensaber:enumeration"
-      },
-      "proficiencyAcademicQualification":{
-        "prefix":"teacher",
-        "type":"opensaber:enumeration"
-      }
-    }
-  },
-  "teachingRole":{
-    "prefix":"teacher",
-    "type":"TeachingRole",
-    "id":"xsd:string",
-    "definition":{
       "teacherType":{
-        "prefix":"teacher",
+        "prefix":"diksha",
         "type":"opensaber:enumeration"
       },
       "appointmentType":{
-        "prefix":"teacher",
+        "prefix":"diksha",
         "type":"opensaber:enumeration"
       },
+      "serviceJoiningDate":{
+        "prefix":"diksha",
+        "type":"schema:Date"
+      },
+      "disabilityType":{
+        "prefix":"diksha",
+        "type":"opensaber:enumeration_array"
+      },
+      "teacherSchoolBoardAffiliation":{
+        "prefix":"diksha",
+        "type":"opensaber:enumeration"
+      },
+      "schoolCode":{
+        "prefix":"diksha",
+        "type":"schema:Text"
+      },
+      "highestAcademicQualification":{
+        "prefix":"diksha",
+        "type":"opensaber:enumeration_array"
+      },
+      "highestTeacherQualification":{
+        "prefix":"diksha",
+        "type":"opensaber:enumeration_array"
+      },
+      "highestMathQualification":{
+        "prefix":"diksha",
+        "type":"opensaber:enumeration"
+      },
+      "highestScienceQualification":{
+        "prefix":"diksha",
+        "type":"opensaber:enumeration"
+      },
+      "highestEnglishQualification":{
+        "prefix":"diksha",
+        "type":"opensaber:enumeration"
+      },
+      "highestSSTQualification":{
+        "prefix":"diksha",
+        "type":"opensaber:enumeration"
+      },
+      "highestVernacularLanguageQualification":{
+        "prefix":"diksha",
+        "type":"opensaber:enumeration"
+      },
+      "vernacularLanguageStudied":{
+        "prefix":"diksha",
+        "type":"opensaber:enumeration_array"
+      },
+      "isEnrolledInDELEDProgramme":{
+        "prefix":"diksha",
+        "type":"schema:Boolean"
+      },
+      "teachingExperience":{
+        "prefix":"diksha",
+        "type":"TeachingExperience",
+        "id":"xsd:string",
+        "collection": true,
+        "definition":{
+          "classesTaught":{
+            "prefix":"diksha",
+            "type":"opensaber:enumeration"
+          },
+          "subjectsTaught":{
+            "prefix":"diksha",
+            "type":"opensaber:enumeration_array"
+          }
+        }
+      },
+      "schoolJoiningDate":{
+        "prefix":"diksha",
+        "type":"schema:Date"
+      },
+      "isMasterTrainer":{
+        "prefix":"diksha",
+        "type":"schema:Boolean"
+      },
+      "masterTrainerSubjects":{
+        "prefix":"diksha",
+        "type":"opensaber:enumeration_array"
+      },
+      "trainingsCompleted":{
+        "prefix":"diksha",
+        "type":"opensaber:enumeration_array"
+      },
+      "isTeacherInBRC":{
+        "prefix":"diksha",
+        "type":"schema:Boolean"
+      },
+      "isTeacherInCRC":{
+        "prefix":"diksha",
+        "type":"schema:Boolean"
+      },
+      "teacherStatus":{
+        "prefix":"diksha",
+        "type":"opensaber:enumeration"
+      },
+      "authenticationStatus":{
+        "prefix":"diksha",
+        "type":"opensaber:enumeration"
+      },
+      "activeStatus":{
+        "prefix":"diksha",
+        "type":"opensaber:enumeration"
+      },
+      "lastUpdatedOn":{
+        "prefix":"diksha",
+        "type":"schema:Date"
+      }
+    }
+  },
+  "externalIds":{
+    "prefix":"diksha",
+    "type":"ExternalID",
+    "id":"xsd:string",
+    "collection": true,
+    "definition":{
+      "eid":{
+        "prefix":"diksha",
+        "type":"schema:Text"
+      },
+      "idType":{
+        "prefix":"diksha",
+        "type":"schema:Text"
+      },
+      "provider":{
+        "prefix":"diksha",
+        "type":"schema:Text"
+      }
+    }
+  },
+  "teachingExperience":{
+    "prefix":"diksha",
+    "type":"TeachingExperience",
+    "id":"xsd:string",
+    "collection": true,
+    "definition":{
       "classesTaught":{
-        "prefix":"teacher",
-        "type":"opensaber:enumeration_array"
+        "prefix":"diksha",
+        "type":"opensaber:enumeration"
       },
-      "appointedForSubjects":{
-        "prefix":"teacher",
+      "subjectsTaught":{
+        "prefix":"diksha",
         "type":"opensaber:enumeration_array"
-      },
-      "mainSubjectsTaught":{
-        "prefix":"teacher",
-        "type":"opensaber:enumeration_array"
-      },
-      "appointmentYear":{
-        "prefix":"teacher",
-        "type":"xsd:gYear"
       }
     }
   },
-  "inServiceTeacherTrainingFromBRC":{
-    "prefix":"teacher",
-    "type":"InServiceTeacherTrainingFromBlockResourceCentre",
-    "definition":{
-      "daysOfInServiceTeacherTraining":{
-        "prefix":"teacher",
-        "type":"xsd:decimal"
-      }
-    }
-  },
-  "inServiceTeacherTrainingFromCRC":{
-    "prefix":"teacher",
-    "type":"InServiceTeacherTrainingFromClusterResourceCentre",
-    "definition":{
-      "daysOfInServiceTeacherTraining":{
-        "prefix":"teacher",
-        "type":"xsd:decimal"
-      }
-    }
-  },
-  "inServiceTeacherTrainingFromDIET":{
-    "prefix":"teacher",
-    "type":"InServiceTeacherTrainingFromDIET",
-    "definition":{
-      "daysOfInServiceTeacherTraining":{
-        "prefix":"teacher",
-        "type":"xsd:decimal"
-      }
-    }
-  },
-  "inServiceTeacherTrainingFromOthers":{
-    "prefix":"teacher",
-    "type":"InServiceTeacherTrainingFromOthers",
-    "definition":{
-      "daysOfInServiceTeacherTraining":{
-        "prefix":"teacher",
-        "type":"xsd:decimal"
-      }
-    }
-  },
-  "nonTeachingAssignmentsForAcademicCalendar":{
-    "prefix":"teacher",
-    "type":"NonTeachingAssignmentsForAcademicCalendar",
-    "definition":{
-      "daysOfNonTeachingAssignments":{
-        "prefix":"teacher",
-        "type":"xsd:decimal"
-      }
-    }
-  },
-  "context": {
-    "xsd": "http://www.w3.org/2001/XMLSchema#",
-    "teacher":"http://localhost:8080/",
-    "@vocab":"http://localhost:8080/",
-    "schema": "http://schema.org/"
+  "context":{
+    "xsd":"http://www.w3.org/2001/XMLSchema#",
+    "diksha":"https://dev.open-sunbird.org/registry/",
+    "@vocab":"https://dev.open-sunbird.org/registry/",
+    "schema":"http://schema.org/"
   }
 }
