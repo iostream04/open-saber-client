@@ -10,6 +10,8 @@ import io.opensaber.pojos.ResponseSerializer;
 import io.opensaber.registry.client.data.RequestData;
 import io.opensaber.registry.client.data.ResponseData;
 import io.opensaber.registry.exception.TransformationException;
+
+import org.apache.http.client.ClientProtocolException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -23,8 +25,10 @@ import org.mockito.MockitoAnnotations;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.api.mockito.PowerMockito;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 import static org.mockito.Mockito.mock;
@@ -75,7 +79,7 @@ public class OpensaberClientTest {
     }
 
     @Test
-    public void testAddEntity() throws TransformationException {
+    public void testAddEntity() throws TransformationException, ClientProtocolException, IOException, URISyntaxException {
         Response apiResponse = new Response(Response.API_ID.CREATE, "OK", new ResponseParams());
         when(opensaberClient.addEntity(requestData, headers)).thenReturn(new ResponseData<>(gson.toJson(apiResponse)));
         Response response = gson.fromJson(opensaberClient.addEntity(requestData, headers).getResponseData(), Response.class);
@@ -84,7 +88,7 @@ public class OpensaberClientTest {
     }
 
     @Test
-    public void testAddAndAssociateEntity() throws UnsupportedEncodingException, TransformationException {
+    public void testAddAndAssociateEntity() throws UnsupportedEncodingException, TransformationException, ClientProtocolException, IOException, URISyntaxException {
         Response apiResponse = new Response(Response.API_ID.CREATE, "OK", new ResponseParams());
         URI entityUri = PowerMockito.mock(URI.class);
         URI propertyPredicateUri = PowerMockito.mock(URI.class);
@@ -97,7 +101,7 @@ public class OpensaberClientTest {
     }
 
     @Test
-    public void testUpdateEntity() throws TransformationException {
+    public void testUpdateEntity() throws TransformationException, ClientProtocolException, IOException, URISyntaxException {
         Response apiResponse = new Response(Response.API_ID.UPDATE, "OK", new ResponseParams());
         when(opensaberClient.updateEntity(requestData, headers)).thenReturn(new ResponseData<>(gson.toJson(apiResponse)));
         Response response = gson.fromJson(opensaberClient.updateEntity(requestData, headers).getResponseData(), Response.class);
@@ -106,7 +110,7 @@ public class OpensaberClientTest {
     }
 
     @Test
-    public void testReadEntity() throws TransformationException {
+    public void testReadEntity() throws TransformationException, ClientProtocolException, IOException, URISyntaxException {
         Response apiResponse = new Response(Response.API_ID.READ, "OK", new ResponseParams());
         URI entityUri = PowerMockito.mock(URI.class);
         when(opensaberClient.readEntity(entityUri, headers)).thenReturn(new ResponseData<>(gson.toJson(apiResponse)));
@@ -116,7 +120,7 @@ public class OpensaberClientTest {
     }
 
     @Test
-    public void testDeleteEntity() {
+    public void testDeleteEntity() throws ClientProtocolException, IOException, URISyntaxException{
         Response apiResponse = new Response(Response.API_ID.DELETE, "OK", new ResponseParams());
         URI propertyPredicateUri = PowerMockito.mock(URI.class);
         when(opensaberClient.deleteEntity(propertyPredicateUri, headers)).thenReturn(new ResponseData<>(gson.toJson(apiResponse)));
