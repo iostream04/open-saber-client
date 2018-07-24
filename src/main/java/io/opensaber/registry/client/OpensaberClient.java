@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class OpensaberClient implements Client<String> {
 
@@ -126,10 +128,12 @@ public class OpensaberClient implements Client<String> {
     @Override
     public ResponseData<String> readEntity(URI entity, Map<String, String> headers)
             throws TransformationException, ClientProtocolException, IOException, URISyntaxException {
-        String response = httpClient.get(Configuration.BASE_URL + ApiEndPoints.READ +"/"+entity.toString(), createHttpHeaders(headers));
+
+        String entityId = extractEntityId(entity);
+        String response = httpClient.get(Configuration.BASE_URL + ApiEndPoints.READ +"/"+entityId, createHttpHeaders(headers));
         //JsonObject responseJson = gson.toJsonTree(response).getAsJsonObject();
         JsonObject responseJson = gson.fromJson(response, JsonObject.class);
-        
+
         String resultNode = gson.toJson(gson.fromJson(response, Response.class).getResult(), mapType);
         String transformedJson = responseTransformer.transform(new RequestData<>(resultNode)).getResponseData();
         logger.debug("Transformed Response Data: " + transformedJson);
@@ -137,9 +141,11 @@ public class OpensaberClient implements Client<String> {
         return new ResponseData<>(responseJson.toString());
     }
 
-    public ResponseData<String> deleteEntity(URI property, Map<String, String> headers) 
+
+    public ResponseData<String> deleteEntity(URI entity, Map<String, String> headers)
     		throws ClientProtocolException, IOException, URISyntaxException{
-        String response = httpClient.delete(Configuration.BASE_URL + ApiEndPoints.DELETE +"/"+property.toString(),
+        String entityId = extractEntityId(entity);
+        String response = httpClient.delete(Configuration.BASE_URL + ApiEndPoints.DELETE +"/"+entityId,
                 createHttpHeaders(headers),null);
         //String result = gson.toJson(response.getBody());
         return new ResponseData<>(response);
@@ -159,5 +165,15 @@ public class OpensaberClient implements Client<String> {
         List<Header> headerList = new ArrayList<Header>();
         headers.forEach((headerName, headerValue) -> headerList.add(new BasicHeader(headerName, headerValue)));
         return headerList.toArray(new Header[headerList.size()]);
+    }
+
+    private String extractEntityId(URI entity){
+        String entityId = entity.toString();
+        Pattern pattern = Pattern.compile("^" + Pattern.quote(Configuration.BASE_URL) + "(.*?)$");
+        Matcher matcher = pattern.matcher(entityId);
+        if(matcher.find()) {
+            entityId = matcher.group(1);
+        }
+        return entityId;
     }
 }
