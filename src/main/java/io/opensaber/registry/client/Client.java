@@ -4,8 +4,12 @@ import io.opensaber.registry.client.data.RequestData;
 import io.opensaber.registry.client.data.ResponseData;
 import io.opensaber.registry.exception.TransformationException;
 
+import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Map;
+
+import org.apache.http.client.ClientProtocolException;
 
 public interface Client<T> {
 
@@ -19,7 +23,7 @@ public interface Client<T> {
      * @param headers
      * @return
      */
-    ResponseData<T> addEntity(RequestData<T> requestData, Map<String, String> headers) throws TransformationException;
+    ResponseData<T> addEntity(RequestData<T> requestData, Map<String, String> headers) throws TransformationException, ClientProtocolException, IOException, URISyntaxException;
 
     /**
      * This method will allow you to update an existing entity. The {@link io.opensaber.registry.client.data.RequestData}
@@ -33,7 +37,7 @@ public interface Client<T> {
      * @param requestData
      * @return
      */
-    ResponseData<T> updateEntity(RequestData<T> requestData, Map<String, String> headers) throws TransformationException;
+    ResponseData<T> updateEntity(RequestData<T> requestData, Map<String, String> headers) throws TransformationException, ClientProtocolException, IOException, URISyntaxException;
 
     /**
      * This method will allow you to create a new entity and link to an existing entity.
@@ -48,7 +52,8 @@ public interface Client<T> {
      * @param requestData
      * @return
      */
-    ResponseData<T> addAndAssociateEntity(URI existingEntity, URI property, RequestData<T> requestData, Map<String, String> headers) throws TransformationException;
+    ResponseData<T> addAndAssociateEntity(URI existingEntity, URI property, RequestData<T> requestData, Map<String, String> headers) 
+    		throws TransformationException, ClientProtocolException, IOException, URISyntaxException;
 
     /**
      * This method will take the FQ {@link java.net.URI} of an existing entity that needs to be retrieved.
@@ -58,7 +63,7 @@ public interface Client<T> {
      * @param headers
      * @return
      */
-    ResponseData<T> readEntity(URI entity, Map<String, String> headers) throws TransformationException;
+    ResponseData<T> readEntity(URI entity, Map<String, String> headers) throws TransformationException, ClientProtocolException, IOException, URISyntaxException;
 
     /**
      * This method will take the FQ {@link java.net.URI} of an existing entity id that needs to be deleted.
@@ -68,5 +73,5 @@ public interface Client<T> {
      * @param headers
      * @return
      */
-    ResponseData<T> deleteEntity(URI property, Map<String, String> headers) ;
+    ResponseData<T> deleteEntity(URI property, Map<String, String> headers) throws ClientProtocolException, IOException, URISyntaxException ;
 }
