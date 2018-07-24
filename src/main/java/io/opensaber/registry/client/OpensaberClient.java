@@ -128,6 +128,7 @@ public class OpensaberClient implements Client<String> {
     @Override
     public ResponseData<String> readEntity(URI entity, Map<String, String> headers)
             throws TransformationException, ClientProtocolException, IOException, URISyntaxException {
+
         String entityId = extractEntityId(entity);
         String response = httpClient.get(Configuration.BASE_URL + ApiEndPoints.READ +"/"+entityId, createHttpHeaders(headers));
         //JsonObject responseJson = gson.toJsonTree(response).getAsJsonObject();
