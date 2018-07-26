@@ -26,7 +26,7 @@ public class Configuration {
     }
 
     private Config load() {
-        Config config = ConfigFactory.load().getConfig("opensaber-client");
+        Config config = ConfigFactory.load("opensaber-client").getConfig("opensaber-client");
         if (config.hasPath(environment)) {
             return config.getConfig(environment).withFallback(config);
         }
