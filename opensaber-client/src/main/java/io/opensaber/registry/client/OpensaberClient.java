@@ -142,9 +142,12 @@ public class OpensaberClient implements Client<String> {
 
     public ResponseData<String> deleteEntity(URI entity, Map<String, String> headers)
     		throws ClientProtocolException, IOException, URISyntaxException{
+        System.out.println("entity = " + entity);
         String entityId = extractEntityId(entity);
+        System.out.println("entityId = " + entityId);
         String response = httpClient.delete(Configuration.BASE_URL + ApiEndPoints.DELETE +"/"+entityId,
                 createHttpHeaders(headers),null);
+        System.out.println("response = " + response);
         //String result = gson.toJson(response.getBody());
         return new ResponseData<>(response);
     }
