@@ -166,12 +166,14 @@ public class OpensaberClient implements Client<String> {
     }
 
     private String extractEntityId(URI entity){
-        String entityId = entity.toString();
-        Pattern pattern = Pattern.compile("^" + Pattern.quote(Configuration.BASE_URL) + "(.*?)$");
+        String strEntity = entity.toString();
+        return strEntity.substring(strEntity.lastIndexOf("/")+1);
+        /*Pattern pattern = Pattern.compile("^" + Pattern.quote(Configuration.BASE_URL) + "(.*?)$");
         Matcher matcher = pattern.matcher(entityId);
         if(matcher.find()) {
             entityId = matcher.group(1);
         }
-        return entityId;
+        return entityId;*/
     }
+
 }
