@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import io.opensaber.pojos.Request;
 import io.opensaber.pojos.RequestParams;
 import io.opensaber.pojos.Response;
+import io.opensaber.pojos.ResponseParams;
 import io.opensaber.pojos.ResponseSerializer;
 import io.opensaber.registry.client.data.RequestData;
 import io.opensaber.registry.client.data.ResponseData;
@@ -130,13 +131,19 @@ public class OpensaberClient implements Client<String> {
             throws TransformationException, ClientProtocolException, IOException, URISyntaxException {
     	String entityId = extractEntityId(entity);
         String response = httpClient.get(Configuration.BASE_URL + ApiEndPoints.READ +"/"+entityId, createHttpHeaders(headers));
+        if(Response.Status.SUCCCESSFUL.equals(gson.fromJson(response, Response.class).getParams().getStatus())){
+            JsonObject responseJson = gson.fromJson(response, JsonObject.class);
+            String resultNode = gson.toJson(gson.fromJson(response, Response.class).getResult(), mapType);
+            String transformedJson = responseTransformer.transform(new RequestData<>(resultNode)).getResponseData();
+            logger.debug("Transformed Response Data: " + transformedJson);
+            responseJson.add("result", gson.fromJson(transformedJson, JsonObject.class));
+            return new ResponseData<>(responseJson.toString());
+        } else {
+            return new ResponseData<>(response);
+        }
+
         //JsonObject responseJson = gson.toJsonTree(response).getAsJsonObject();
-        JsonObject responseJson = gson.fromJson(response, JsonObject.class);
-        String resultNode = gson.toJson(gson.fromJson(response, Response.class).getResult(), mapType);
-        String transformedJson = responseTransformer.transform(new RequestData<>(resultNode)).getResponseData();
-        logger.debug("Transformed Response Data: " + transformedJson);
-        responseJson.add("result", gson.fromJson(transformedJson, JsonObject.class));
-        return new ResponseData<>(responseJson.toString());
+
     }
 
 
