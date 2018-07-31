@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import io.opensaber.pojos.Request;
 import io.opensaber.pojos.RequestParams;
@@ -137,7 +138,8 @@ public class OpensaberClient implements Client<String> {
         String transformedJson = responseTransformer.transform(new RequestData<>(resultNode)).getResponseData();
         System.out.println("transformedJson==>"+transformedJson);
         logger.debug("Transformed Response Data: " + transformedJson);
-        responseJson.add("result", gson.fromJson(transformedJson, JsonObject.class));
+        JsonElement resultElement = gson.toJsonTree(gson.fromJson(transformedJson, mapType));
+        responseJson.add("result", resultElement);
         return new ResponseData<>(responseJson.toString());
     }
 
