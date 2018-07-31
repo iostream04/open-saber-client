@@ -130,10 +130,12 @@ public class OpensaberClient implements Client<String> {
             throws TransformationException, ClientProtocolException, IOException, URISyntaxException {
     	String entityId = extractEntityId(entity);
         String response = httpClient.get(Configuration.BASE_URL + ApiEndPoints.READ +"/"+entityId, createHttpHeaders(headers));
+        System.out.println("response from read==>"+response);
         //JsonObject responseJson = gson.toJsonTree(response).getAsJsonObject();
         JsonObject responseJson = gson.fromJson(response, JsonObject.class);
         String resultNode = gson.toJson(gson.fromJson(response, Response.class).getResult(), mapType);
         String transformedJson = responseTransformer.transform(new RequestData<>(resultNode)).getResponseData();
+        System.out.println("transformedJson==>"+transformedJson);
         logger.debug("Transformed Response Data: " + transformedJson);
         responseJson.add("result", gson.fromJson(transformedJson, JsonObject.class));
         return new ResponseData<>(responseJson.toString());
