@@ -131,7 +131,7 @@ public class OpensaberClient implements Client<String> {
     	String entityId = extractEntityId(entity);
         String response = httpClient.get(Configuration.BASE_URL + ApiEndPoints.READ +"/"+entityId, createHttpHeaders(headers));
         //JsonObject responseJson = gson.toJsonTree(response).getAsJsonObject();
-        JsonObject responseJson = (JsonObject) gson.toJsonTree(gson.fromJson(response, mapType));
+        JsonObject responseJson = gson.fromJson(response, JsonObject.class);
         String resultNode = gson.toJson(gson.fromJson(response, Response.class).getResult(), mapType);
         String transformedJson = responseTransformer.transform(new RequestData<>(resultNode)).getResponseData();
         logger.debug("Transformed Response Data: " + transformedJson);
