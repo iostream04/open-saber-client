@@ -131,12 +131,10 @@ public class OpensaberClient implements Client<String> {
             throws TransformationException, ClientProtocolException, IOException, URISyntaxException {
     	String entityId = extractEntityId(entity);
         String response = httpClient.get(Configuration.BASE_URL + ApiEndPoints.READ +"/"+entityId, createHttpHeaders(headers));
-        System.out.println("response from read==>"+response);
         //JsonObject responseJson = gson.toJsonTree(response).getAsJsonObject();
         JsonObject responseJson = (JsonObject) gson.toJsonTree(gson.fromJson(response, mapType));
         String resultNode = gson.toJson(gson.fromJson(response, Response.class).getResult(), mapType);
         String transformedJson = responseTransformer.transform(new RequestData<>(resultNode)).getResponseData();
-        System.out.println("transformedJson==>"+transformedJson);
         logger.debug("Transformed Response Data: " + transformedJson);
         JsonElement resultElement = gson.toJsonTree(gson.fromJson(transformedJson, mapType));
         responseJson.add("result", resultElement);
@@ -146,12 +144,9 @@ public class OpensaberClient implements Client<String> {
 
     public ResponseData<String> deleteEntity(URI entity, Map<String, String> headers)
     		throws ClientProtocolException, IOException, URISyntaxException{
-        System.out.println("entity = " + entity);
         String entityId = extractEntityId(entity);
-        System.out.println("entityId = " + entityId);
         String response = httpClient.delete(Configuration.BASE_URL + ApiEndPoints.DELETE +"/"+entityId,
                 createHttpHeaders(headers),null);
-        System.out.println("response = " + response);
         //String result = gson.toJson(response.getBody());
         return new ResponseData<>(response);
     }
