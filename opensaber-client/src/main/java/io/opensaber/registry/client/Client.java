@@ -74,4 +74,16 @@ public interface Client<T> {
      * @return
      */
     ResponseData<T> deleteEntity(URI property, Map<String, String> headers) throws ClientProtocolException, IOException, URISyntaxException ;
+    
+    /**
+     * This method will allow you to search for entities based on property names and values provided in the JSON input
+     * @param requestData - A sample requestData to search for all teachers with serialNum 12, would look like this
+     * {\"teacher\":{\"serialNum\":12}}
+     * @param headers
+     * @return
+     * @throws TransformationException
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    ResponseData<String> searchEntity(RequestData<String> requestData, Map<String, String> headers) throws TransformationException, IOException, URISyntaxException;
 }

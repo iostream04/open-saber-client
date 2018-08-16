@@ -23,16 +23,20 @@ import org.apache.http.message.BasicHeader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class OpensaberClient implements Client<String> {
 
@@ -131,7 +135,7 @@ public class OpensaberClient implements Client<String> {
             throws TransformationException, ClientProtocolException, IOException, URISyntaxException {
     	String entityId = extractEntityId(entity);
         String response = httpClient.get(Configuration.BASE_URL + ApiEndPoints.READ +"/"+entityId, createHttpHeaders(headers));
-        if(Response.Status.SUCCCESSFUL.equals(gson.fromJson(response, Response.class).getParams().getStatus())){
+        if(Response.Status.SUCCESSFUL.equals(gson.fromJson(response, Response.class).getParams().getStatus())){
             JsonObject responseJson = gson.fromJson(response, JsonObject.class);
             String resultNode = gson.toJson(gson.fromJson(response, Response.class).getResult(), mapType);
             String transformedJson = responseTransformer.transform(new RequestData<>(resultNode)).getResponseData();
@@ -154,6 +158,22 @@ public class OpensaberClient implements Client<String> {
                 createHttpHeaders(headers),null);
         //String result = gson.toJson(response.getBody());
         return new ResponseData<>(response);
+    }
+    
+    
+    @Override
+    public ResponseData<String> searchEntity(RequestData<String> requestData, Map<String, String> headers)
+            throws TransformationException, IOException, URISyntaxException {
+    	ResponseData<String> transformedReqData = requestTransformer.transform(requestData);
+        logger.debug("SearchEntity Transformed Request Data: " + transformedReqData.getResponseData());
+        String response = httpClient.post(Configuration.BASE_URL + ApiEndPoints.SEARCH, createHttpHeaders(headers), 
+        		gson.toJson(createRequestEntity(transformedReqData.getResponseData())));
+        JsonObject responseJson = gson.fromJson(response, JsonObject.class);
+        String resultNode = gson.toJson(gson.fromJson(response, Response.class).getResult(), mapType);
+        String transformedJson = responseTransformer.transform(new RequestData<>(resultNode)).getResponseData();
+        logger.debug("Transformed Response Data: " + transformedJson);
+        responseJson.add("result", gson.fromJson(transformedJson, JsonObject.class));
+        return new ResponseData<>(responseJson.toString());
     }
 
     private Request createRequestEntity(String requestData) {
