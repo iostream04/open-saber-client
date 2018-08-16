@@ -128,4 +128,14 @@ public class OpensaberClientTest {
         assertEquals(response.getResponseCode(), "OK");
         assertEquals(response.getId(), Response.API_ID.DELETE.getId());
     }
+    
+    
+    @Test
+    public void testSearchEntity() throws TransformationException, ClientProtocolException, IOException, URISyntaxException {
+        Response apiResponse = new Response(Response.API_ID.SEARCH, "OK", new ResponseParams());
+        when(opensaberClient.searchEntity(requestData, headers)).thenReturn(new ResponseData<>(gson.toJson(apiResponse)));
+        Response response = gson.fromJson(opensaberClient.searchEntity(requestData, headers).getResponseData(), Response.class);
+        assertEquals(response.getResponseCode(), "OK");
+        assertEquals(response.getId(), Response.API_ID.SEARCH.getId());
+    }
 }

@@ -77,13 +77,15 @@ public interface Client<T> {
     
     /**
      * This method will allow you to search for entities based on property names and values provided in the JSON input
-     * @param requestData
+     * @param requestData - A sample requestData to search for all teachers with serialNum 12, would look like this
+     * "teacher":{
+     * 	"serialNum":12
+     * }
      * @param headers
      * @return
      * @throws TransformationException
-     * @throws ClientProtocolException
      * @throws IOException
      * @throws URISyntaxException
      */
-    ResponseData<String> searchEntity(RequestData<String> requestData, Map<String, String> headers) throws TransformationException, ClientProtocolException, IOException, URISyntaxException;
+    ResponseData<String> searchEntity(RequestData<String> requestData, Map<String, String> headers) throws TransformationException, IOException, URISyntaxException;
 }

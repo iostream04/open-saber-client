@@ -118,7 +118,7 @@ public class OpensaberClientIntegrationTestSteps extends RegistryTestBase implem
 
     private void checkSuccessfulResponse() throws IOException {
         response = mapper.readValue(responseData.getResponseData(), Response.class);
-        assertEquals(Response.Status.SUCCCESSFUL, response.getParams().getStatus());
+        assertEquals(Response.Status.SUCCESSFUL, response.getParams().getStatus());
     }
 
     private void checkNodeMappingNotDefinedExcpetion() {

@@ -135,7 +135,7 @@ public class OpensaberClient implements Client<String> {
             throws TransformationException, ClientProtocolException, IOException, URISyntaxException {
     	String entityId = extractEntityId(entity);
         String response = httpClient.get(Configuration.BASE_URL + ApiEndPoints.READ +"/"+entityId, createHttpHeaders(headers));
-        if(Response.Status.SUCCCESSFUL.equals(gson.fromJson(response, Response.class).getParams().getStatus())){
+        if(Response.Status.SUCCESSFUL.equals(gson.fromJson(response, Response.class).getParams().getStatus())){
             JsonObject responseJson = gson.fromJson(response, JsonObject.class);
             String resultNode = gson.toJson(gson.fromJson(response, Response.class).getResult(), mapType);
             String transformedJson = responseTransformer.transform(new RequestData<>(resultNode)).getResponseData();
@@ -163,7 +163,7 @@ public class OpensaberClient implements Client<String> {
     
     @Override
     public ResponseData<String> searchEntity(RequestData<String> requestData, Map<String, String> headers)
-            throws TransformationException, ClientProtocolException, IOException, URISyntaxException {
+            throws TransformationException, IOException, URISyntaxException {
     	ResponseData<String> transformedReqData = requestTransformer.transform(requestData);
         logger.debug("SearchEntity Transformed Request Data: " + transformedReqData.getResponseData());
         String response = httpClient.post(Configuration.BASE_URL + ApiEndPoints.SEARCH, createHttpHeaders(headers), 
